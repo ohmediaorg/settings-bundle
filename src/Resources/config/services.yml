@@ -1,12 +1,12 @@
 services:
-    JstnThms\SettingsBundle\Settings\Settings:
+    OHMedia\SettingsBundle\Settings\Settings:
         arguments: ["@doctrine.orm.entity_manager"]
     
-    jstnthms_settings.settings:
-        alias: JstnThms\SettingsBundle\Settings\Settings
+    ohmedia_settings.settings:
+        alias: OHMedia\SettingsBundle\Settings\Settings
 
-    jstnthms_settings.twig_extension:
-        class: JstnThms\SettingsBundle\Twig\SettingsExtension
-        arguments: ["@jstnthms_settings.settings"]
+    ohmedia_settings.twig_extension:
+        class: OHMedia\SettingsBundle\Twig\SettingsExtension
+        arguments: ["@ohmedia_settings.settings"]
         tags:
             - { name: twig.extension }

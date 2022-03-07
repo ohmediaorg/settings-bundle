@@ -11,7 +11,7 @@ Enable the bundle in `config/bundles.php`:
 ```php
 return [
     // ...
-    JstnThms\SettingsBundle\JstnThmsSettingsBundle::class => ['all' => true],
+    OHMedia\SettingsBundle\OHMediaSettingsBundle::class => ['all' => true],
 ];
 ```
 
@@ -28,7 +28,7 @@ How-To
 Custom settings are created through the service:
 
 ```php
-use JstnThms\SettingsBundle\Settings\Settings;
+use OHMedia\SettingsBundle\Settings\Settings;
 
 public function myAction(Settings $settings)
 {
@@ -39,13 +39,13 @@ public function myAction(Settings $settings)
 Once the setting is saved the value will be accessible in Twig:
 
 ```twig
-{{ jstnthms_settings('app_my_new_setting') }}
+{{ ohmedia_settings('app_my_new_setting') }}
 ```
 
 or from the service itself:
 
 ```php
-use JstnThms\SettingsBundle\Settings\Settings;
+use OHMedia\SettingsBundle\Settings\Settings;
 
 public function myAction(Settings $settings)
 {
@@ -62,17 +62,17 @@ More Complex Data
 If your settings value is more complex than a string,
 then you need to be able to convert it to and from a string.
 
-First, create a service tagged with `jstnthms_settings.transformer`:
+First, create a service tagged with `ohmedia_settings.transformer`:
 
 ```yaml
 services:
     mybundle.settings:
         class: App\Settings\Transformer
         tags:
-            - { name: jstnthms_settings.transformer }
+            - { name: ohmedia_settings.transformer }
 ```
 
-Your service should implement `JstnThms\SettingsBundle\Settings\SettingsTransformerInterface`,
+Your service should implement `OHMedia\SettingsBundle\Settings\SettingsTransformerInterface`,
 which requires three functions. One function that gives the ID of the setting,
 and two functions to transform that setting's value.
 
@@ -83,7 +83,7 @@ namespace App\Settings;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use JstnThms\SettingsBundle\Settings\SettingsTransformerInterface;
+use OHMedia\SettingsBundle\Settings\SettingsTransformerInterface;
 
 class Transformer implements SettingsTransformerInterface
 {

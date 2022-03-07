@@ -1,6 +1,6 @@
 <?php
 
-namespace JstnThms\SettingsBundle\Settings;
+namespace OHMedia\SettingsBundle\Settings;
 
 interface SettingsTransformerInterface
 {

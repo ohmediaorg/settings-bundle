@@ -1,6 +1,6 @@
 <?php
 
-namespace JstnThms\SettingsBundle\DependencyInjection;
+namespace OHMedia\SettingsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('jstnthms_settings');
+        $treeBuilder = new TreeBuilder('ohmedia_settings');
         
         return $treeBuilder;
     }

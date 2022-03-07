@@ -1,6 +1,6 @@
 <?php
 
-namespace JstnThms\SettingsBundle\DependencyInjection\Compiler;
+namespace OHMedia\SettingsBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -11,13 +11,13 @@ class SettingsPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         // always first check if the primary service is defined
-        if (!$container->has('jstnthms_settings.settings')) {
+        if (!$container->has('ohmedia_settings.settings')) {
             return;
         }
 
-        $definition = $container->findDefinition('jstnthms_settings.settings');
+        $definition = $container->findDefinition('ohmedia_settings.settings');
 
-        $tagged = $container->findTaggedServiceIds('jstnthms_settings.transformer');
+        $tagged = $container->findTaggedServiceIds('ohmedia_settings.transformer');
 
         foreach ($tagged as $id => $tags) {
             $definition->addMethodCall('addTransformer', [new Reference($id)]);

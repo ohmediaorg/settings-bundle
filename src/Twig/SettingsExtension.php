@@ -1,8 +1,8 @@
 <?php
 
-namespace JstnThms\SettingsBundle\Twig;
+namespace OHMedia\SettingsBundle\Twig;
 
-use JstnThms\SettingsBundle\Settings\Settings;
+use OHMedia\SettingsBundle\Settings\Settings;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -18,7 +18,7 @@ class SettingsExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('jstnthms_setting', [$this, 'getSetting'])
+            new TwigFunction('ohmedia_setting', [$this, 'getSetting'])
         ];
     }
     

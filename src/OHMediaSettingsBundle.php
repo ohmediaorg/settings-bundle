@@ -1,12 +1,12 @@
 <?php
 
-namespace JstnThms\SettingsBundle;
+namespace OHMedia\SettingsBundle;
 
-use JstnThms\SettingsBundle\DependencyInjection\Compiler\SettingsPass;
+use OHMedia\SettingsBundle\DependencyInjection\Compiler\SettingsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class JstnThmsSettingsBundle extends Bundle
+class OHMediaSettingsBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

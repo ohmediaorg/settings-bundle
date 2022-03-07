@@ -1,9 +1,9 @@
 <?php
 
-namespace JstnThms\SettingsBundle\Settings;
+namespace OHMedia\SettingsBundle\Settings;
 
 use Doctrine\ORM\EntityManager;
-use JstnThms\SettingsBundle\Entity\Setting;
+use OHMedia\SettingsBundle\Entity\Setting;
 
 class Settings
 {

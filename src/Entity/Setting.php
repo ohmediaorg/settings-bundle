@@ -1,6 +1,6 @@
 <?php
 
-namespace JstnThms\SettingsBundle\Entity;
+namespace OHMedia\SettingsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
