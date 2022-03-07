@@ -1,0 +1,12 @@
+services:
+    JstnThms\SettingsBundle\Settings\Settings:
+        arguments: ["@doctrine.orm.entity_manager"]
+    
+    jstnthms_settings.settings:
+        alias: JstnThms\SettingsBundle\Settings\Settings
+
+    jstnthms_settings.twig_extension:
+        class: JstnThms\SettingsBundle\Twig\SettingsExtension
+        arguments: ["@jstnthms_settings.settings"]
+        tags:
+            - { name: twig.extension }
