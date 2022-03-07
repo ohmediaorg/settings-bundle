@@ -66,10 +66,8 @@ First, create a service tagged with `ohmedia_settings.transformer`:
 
 ```yaml
 services:
-    mybundle.settings:
-        class: App\Settings\Transformer
-        tags:
-            - { name: ohmedia_settings.transformer }
+    App\Settings\Transformer:
+        tags: ["ohmedia_settings.transformer"]
 ```
 
 Your service should implement `OHMedia\SettingsBundle\Interfaces\TransformerInterface`,
