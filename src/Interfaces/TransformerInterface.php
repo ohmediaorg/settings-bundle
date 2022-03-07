@@ -1,8 +1,8 @@
 <?php
 
-namespace OHMedia\SettingsBundle\Settings;
+namespace OHMedia\SettingsBundle\Interfaces;
 
-interface SettingsTransformerInterface
+interface TransformerInterface
 {
     public function getId() : string;
     public function transform($value) : ?string;

@@ -28,7 +28,7 @@ How-To
 Custom settings are created through the service:
 
 ```php
-use OHMedia\SettingsBundle\Settings\Settings;
+use OHMedia\SettingsBundle\Service\Settings;
 
 public function myAction(Settings $settings)
 {
@@ -45,7 +45,7 @@ Once the setting is saved the value will be accessible in Twig:
 or from the service itself:
 
 ```php
-use OHMedia\SettingsBundle\Settings\Settings;
+use OHMedia\SettingsBundle\Service\Settings;
 
 public function myAction(Settings $settings)
 {
@@ -72,7 +72,7 @@ services:
             - { name: ohmedia_settings.transformer }
 ```
 
-Your service should implement `OHMedia\SettingsBundle\Settings\SettingsTransformerInterface`,
+Your service should implement `OHMedia\SettingsBundle\Interfaces\TransformerInterface`,
 which requires three functions. One function that gives the ID of the setting,
 and two functions to transform that setting's value.
 
@@ -83,9 +83,9 @@ namespace App\Settings;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use OHMedia\SettingsBundle\Settings\SettingsTransformerInterface;
+use OHMedia\SettingsBundle\Interfaces\TransformerInterface;
 
-class Transformer implements SettingsTransformerInterface
+class Transformer implements TransformerInterface
 {
     private $userRepository;
     
