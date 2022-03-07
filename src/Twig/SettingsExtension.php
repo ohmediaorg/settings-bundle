@@ -22,7 +22,7 @@ class SettingsExtension extends AbstractExtension
         ];
     }
 
-    public function getSetting($setting)
+    public function getSetting(string $setting): mixed
     {
         return $this->settings->get($setting);
     }

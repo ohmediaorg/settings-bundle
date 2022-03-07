@@ -19,7 +19,7 @@ class Settings
         $this->settings = [];
     }
 
-    public function set(string $id, $value)
+    public function set(string $id, $value): self
     {
         if ('' === $id) {
             return $this;
@@ -47,7 +47,7 @@ class Settings
         return $this;
     }
 
-    public function get(string $id)
+    public function get(string $id): mixed
     {
         if ('' === $id) {
             return null;
@@ -68,7 +68,7 @@ class Settings
         return $this->settings[$id];
     }
 
-    public function addTransformer(TransformerInterface $transformer)
+    public function addTransformer(TransformerInterface $transformer): self
     {
         $this->transformers[$transformer->getId()] = $transformer;
 
