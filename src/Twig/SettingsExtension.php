@@ -15,7 +15,7 @@ class SettingsExtension extends AbstractExtension
         $this->settings = $settings;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('ohmedia_setting', [$this, 'getSetting'])
