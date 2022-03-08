@@ -4,21 +4,15 @@ namespace OHMedia\SettingsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="settings")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'settings')]
 class Setting
 {
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Id()]
+    #[ORM\Column(type: 'string', length: 255)]
     private $id;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $value;
 
     public function getId()
@@ -29,7 +23,7 @@ class Setting
     public function setId(string $id)
     {
         $this->id = $id;
-        
+
         return $this;
     }
 
