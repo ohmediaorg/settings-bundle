@@ -39,7 +39,7 @@ public function myAction(Settings $settings)
 Once the setting is saved the value will be accessible in Twig:
 
 ```twig
-{{ ohmedia_settings('app_my_new_setting') }}
+{{ oh_media_settings('app_my_new_setting') }}
 ```
 
 or from the service itself:
@@ -62,12 +62,12 @@ More Complex Data
 If your settings value is more complex than a string,
 then you need to be able to convert it to and from a string.
 
-First, create a service tagged with `ohmedia_settings.transformer`:
+First, create a service tagged with `oh_media_settings.transformer`:
 
 ```yaml
 services:
     App\Settings\Transformer:
-        tags: ["ohmedia_settings.transformer"]
+        tags: ["oh_media_settings.transformer"]
 ```
 
 Your service should implement `OHMedia\SettingsBundle\Interfaces\TransformerInterface`,
