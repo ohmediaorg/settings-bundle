@@ -39,7 +39,7 @@ public function myAction(Settings $settings)
 Once the setting is saved the value will be accessible in Twig:
 
 ```twig
-{{ oh_media_settings('app_my_new_setting') }}
+{{ setting('app_my_new_setting') }}
 ```
 
 or from the service itself:
