@@ -1,5 +1,5 @@
 {
-    "name": "justin-oh/settings-bundle",
+    "name": "ohmediaorg/settings-bundle",
     "type": "symfony-bundle",
     "description": "Symfony SettingsBundle",
     "keywords": ["Settings"],
