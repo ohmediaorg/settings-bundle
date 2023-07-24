@@ -2,6 +2,7 @@
 
 namespace OHMedia\SettingsBundle\DependencyInjection;
 
+use OHMedia\SettingsBundle\Interfaces\TransformerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,5 +25,9 @@ class OHMediaSettingsExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->registerForAutoconfiguration(TransformerInterface::class)
+            ->addTag('oh_media_settings.transformer')
+        ;
     }
 }
