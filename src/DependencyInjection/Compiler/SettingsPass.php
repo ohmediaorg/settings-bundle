@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class SettingsPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         // always first check if the primary service is defined
         if (!$container->has('oh_media_settings.settings')) {
