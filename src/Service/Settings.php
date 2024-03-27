@@ -66,7 +66,7 @@ class Settings
 
             $string = $setting ? $setting->getValue() : null;
 
-            if (preg_match('/^ENTITY:/', $string)) {
+            if ($string && preg_match('/^ENTITY:/', $string)) {
                 $parts = explode(':', $string);
 
                 $value = $this->em->getRepository($parts[1])->find($parts[2]);
