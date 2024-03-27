@@ -34,9 +34,17 @@ class Settings
             $this->em->persist($setting);
         }
 
-        $string = array_key_exists($id, $this->transformers)
-            ? $this->transformers[$id]->transform($value)
-            : $value;
+        if ($this->isEntity($value)) {
+            $string = implode(':', [
+                'ENTITY',
+                $value::class,
+                $value->getId(),
+            ]);
+        } elseif (array_key_exists($id, $this->transformers)) {
+            $string = $this->transformers[$id]->transform($value);
+        } else {
+            $string = $value;
+        }
 
         $setting->setValue($string);
 
@@ -58,9 +66,15 @@ class Settings
 
             $string = $setting ? $setting->getValue() : null;
 
-            $value = array_key_exists($id, $this->transformers)
-                ? $this->transformers[$id]->reverseTransform($string)
-                : $string;
+            if (preg_match('/^ENTITY:/', $string)) {
+                $parts = explode(':', $string);
+
+                $value = $this->em->getRepository($parts[1])->find($parts[2]);
+            } elseif (array_key_exists($id, $this->transformers)) {
+                $value = $this->transformers[$id]->reverseTransform($string);
+            } else {
+                $value = $string;
+            }
 
             $this->settings[$id] = $value;
         }
@@ -73,5 +87,24 @@ class Settings
         $this->transformers[$transformer->getId()] = $transformer;
 
         return $this;
+    }
+
+    private function isEntity(mixed $value): bool
+    {
+        if (!is_object($value)) {
+            return false;
+        }
+
+        $reflection = new \ReflectionClass($value::class);
+
+        $attributes = $reflection->getAttributes();
+
+        foreach ($attributes as $attribute) {
+            if ('Doctrine\ORM\Mapping\Entity' === $attribute->getName()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
