@@ -1,10 +1,8 @@
-Overview
-========
+# Overview
 
 This bundle offers functionality to store name/value settings in the DB.
 
-Installation
-------------
+## Installation
 
 Enable the bundle in `config/bundles.php`:
 
@@ -22,8 +20,7 @@ $ php bin/console make:migration
 $ php bin/console doctrine:migrations:migrate
 ```
 
-How-To
-------
+## How-To 
 
 Custom settings are created through the service:
 
@@ -56,10 +53,15 @@ public function myAction(Settings $settings)
 It is recommended to prefix your setting with your bundle name
 to significantly reduce the chance of ID collision.
 
-More Complex Data
------------------
+## Entities
 
-If your settings value is more complex than a string,
+If you have an entity (uses the `Doctrine\ORM\Mapping\Entity` attribute),
+and save it in a settings, it will be automatically handled. There is no
+need for a custom transformer.
+
+## More Complex Data
+
+If your settings value is more complex than a string or Entity,
 then you need to be able to convert it to and from a string.
 
 First, create a service tagged with `oh_media_settings.transformer`:
