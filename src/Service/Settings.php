@@ -34,11 +34,11 @@ class Settings
             $this->em->persist($setting);
         }
 
-        if ($this->isEntity($value)) {
+        if ($entityId = $this->getEntityId($value)) {
             $string = implode(':', [
                 'ENTITY',
                 $value::class,
-                $value->getId(),
+                $entityId,
             ]);
         } elseif (array_key_exists($id, $this->transformers)) {
             $string = $this->transformers[$id]->transform($value);
@@ -89,22 +89,16 @@ class Settings
         return $this;
     }
 
-    private function isEntity(mixed $value): bool
+    private function getEntityId(mixed $entity): ?string
     {
-        if (!is_object($value)) {
-            return false;
+        try {
+            $metadata = $this->em->getClassMetadata($entity::class);
+
+            $identifier = $metadata->getSingleIdReflectionProperty();
+
+            return (string) $identifier->getValue($entity);
+        } catch (\Exception $e) {
+            return null;
         }
-
-        $reflection = new \ReflectionClass($value::class);
-
-        $attributes = $reflection->getAttributes();
-
-        foreach ($attributes as $attribute) {
-            if ('Doctrine\ORM\Mapping\Entity' === $attribute->getName()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
