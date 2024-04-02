@@ -55,24 +55,15 @@ to significantly reduce the chance of ID collision.
 
 ## Entities
 
-If you have an entity (uses the `Doctrine\ORM\Mapping\Entity` attribute),
-and save it in a settings, it will be automatically handled. There is no
-need for a custom transformer.
+If you have an entity and save it in a settings, it will be automatically handled
+as long as the identifier is not composite. There is no need for a custom transformer.
 
 ## More Complex Data
 
-If your settings value is more complex than a string or Entity,
+If your settings value is more complex than a string or a basic Entity,
 then you need to be able to convert it to and from a string.
 
-First, create a service tagged with `oh_media_settings.transformer`:
-
-```yaml
-services:
-    App\Settings\Transformer:
-        tags: ["oh_media_settings.transformer"]
-```
-
-Your service should implement `OHMedia\SettingsBundle\Interfaces\TransformerInterface`,
+First, create a service that implements `OHMedia\SettingsBundle\Interfaces\TransformerInterface`,
 which requires three functions. One function that gives the ID of the setting,
 and two functions to transform that setting's value.
 
