@@ -9,3 +9,6 @@ services:
         class: OHMedia\SettingsBundle\Twig\SettingsExtension
         arguments: ["@oh_media_settings.settings"]
         tags: ["twig.extension"]
+
+    OHMedia\SettingsBundle\Service\SettingEntityChoice:
+        tags: ["oh_media_security.entity_choice"]
