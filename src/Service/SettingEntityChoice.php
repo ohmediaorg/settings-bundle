@@ -3,6 +3,7 @@
 namespace OHMedia\SettingsBundle\Service;
 
 use OHMedia\SettingsBundle\Entity\Setting;
+use OHMedia\SecurityBundle\Service\EntityChoiceInterface;
 
 class SettingEntityChoice implements EntityChoiceInterface
 {
