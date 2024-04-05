@@ -91,6 +91,10 @@ class Settings
 
     private function getEntityId(mixed $entity): ?string
     {
+        if (!is_object($entity)) {
+            return null;
+        }
+
         try {
             $metadata = $this->em->getClassMetadata($entity::class);
 
