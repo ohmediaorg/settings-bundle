@@ -20,7 +20,7 @@ $ php bin/console make:migration
 $ php bin/console doctrine:migrations:migrate
 ```
 
-## How-To 
+## How-To
 
 Custom settings are created through the service:
 
@@ -78,23 +78,20 @@ use OHMedia\SettingsBundle\Interfaces\TransformerInterface;
 
 class Transformer implements TransformerInterface
 {
-    private $userRepository;
-    
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
-    
+
     public function getId(): string
     {
         return 'my_special_user';
     }
-    
+
     public function transform($value): ?string
     {
         return (string) $value->getId();
     }
-    
+
     public function reverseTransform(?string $value)
     {
         return $userRepository->find($value);

@@ -8,15 +8,11 @@ use OHMedia\SettingsBundle\Interfaces\TransformerInterface;
 
 class Settings
 {
-    private $em;
-    private $transformers;
-    private $settings;
+    private array $settings = [];
+    private array $transformers = [];
 
-    public function __construct(EntityManager $em)
+    public function __construct(private EntityManager $em)
     {
-        $this->em = $em;
-        $this->transformers = [];
-        $this->settings = [];
     }
 
     public function set(string $id, $value): self

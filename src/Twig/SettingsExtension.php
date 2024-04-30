@@ -8,11 +8,8 @@ use Twig\TwigFunction;
 
 class SettingsExtension extends AbstractExtension
 {
-    private $settings;
-
-    public function __construct(Settings $settings)
+    public function __construct(private Settings $settings)
     {
-        $this->settings = $settings;
     }
 
     public function getFunctions(): array
