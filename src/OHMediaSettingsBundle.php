@@ -12,6 +12,8 @@ class OHMediaSettingsBundle extends AbstractBundle
 {
     public function build(ContainerBuilder $container): void
     {
+        parent::build($container);
+
         $container->addCompilerPass(new SettingsPass());
     }
 
