@@ -4,14 +4,16 @@ This bundle offers functionality to store name/value settings in the DB.
 
 ## Installation
 
-Enable the bundle in `config/bundles.php`:
+Update `composer.json` by adding this to the `repositories` array:
 
-```php
-return [
-    // ...
-    OHMedia\SettingsBundle\OHMediaSettingsBundle::class => ['all' => true],
-];
+```json
+{
+    "type": "vcs",
+    "url": "https://github.com/ohmediaorg/settings-bundle"
+}
 ```
+
+Then run `composer require ohmediaorg/settings-bundle:dev-main`.
 
 Make and run the migration:
 
