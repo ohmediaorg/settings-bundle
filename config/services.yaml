@@ -1,6 +1,6 @@
 services:
     OHMedia\SettingsBundle\Service\Settings:
-        arguments: ["@doctrine.orm.entity_manager"]
+        autowire: true
 
     oh_media_settings.settings: '@OHMedia\SettingsBundle\Service\Settings'
 

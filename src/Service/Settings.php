@@ -2,17 +2,20 @@
 
 namespace OHMedia\SettingsBundle\Service;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use OHMedia\SettingsBundle\Entity\Setting;
 use OHMedia\SettingsBundle\Interfaces\TransformerInterface;
+use OHMedia\UtilityBundle\Service\EntityIdentifier;
 
 class Settings
 {
     private array $settings = [];
     private array $transformers = [];
 
-    public function __construct(private EntityManager $em)
-    {
+    public function __construct(
+        private EntityIdentifier $entityIdentifier,
+        private EntityManagerInterface $em
+    ) {
     }
 
     public function set(string $id, $value): self
@@ -30,7 +33,7 @@ class Settings
             $this->em->persist($setting);
         }
 
-        if ($entityId = $this->getEntityId($value)) {
+        if ($entityId = $this->entityIdentifier->get($value)) {
             $string = implode(':', [
                 'ENTITY',
                 $value::class,
@@ -83,22 +86,5 @@ class Settings
         $this->transformers[$transformer->getId()] = $transformer;
 
         return $this;
-    }
-
-    private function getEntityId(mixed $entity): ?string
-    {
-        if (!is_object($entity)) {
-            return null;
-        }
-
-        try {
-            $metadata = $this->em->getClassMetadata($entity::class);
-
-            $identifier = $metadata->getSingleIdReflectionProperty();
-
-            return (string) $identifier->getValue($entity);
-        } catch (\Exception $e) {
-            return null;
-        }
     }
 }
