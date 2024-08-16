@@ -9,13 +9,19 @@ use OHMedia\UtilityBundle\Service\EntityIdentifier;
 
 class Settings
 {
-    private array $settings = [];
+    private array $entities = [];
     private array $transformers = [];
+    private array $values = [];
 
     public function __construct(
         private EntityIdentifier $entityIdentifier,
         private EntityManagerInterface $em
     ) {
+        $entities = $this->em->getRepository(Setting::class)->findAll();
+
+        foreach ($entities as $entity) {
+            $this->entities[$entity->getId()] = $entity;
+        }
     }
 
     public function set(string $id, $value): self
@@ -24,7 +30,7 @@ class Settings
             return $this;
         }
 
-        $setting = $this->em->getRepository(Setting::class)->find($id);
+        $setting = $this->getEntity($id);
 
         if (!$setting) {
             $setting = new Setting();
@@ -49,7 +55,7 @@ class Settings
 
         $this->em->flush();
 
-        $this->settings[$id] = $value;
+        $this->values[$id] = $value;
 
         return $this;
     }
@@ -60,8 +66,8 @@ class Settings
             return null;
         }
 
-        if (!array_key_exists($id, $this->settings)) {
-            $setting = $this->em->getRepository(Setting::class)->find($id);
+        if (!array_key_exists($id, $this->values)) {
+            $setting = $this->entities[$id] ?? null;
 
             $string = $setting ? $setting->getValue() : null;
 
@@ -75,10 +81,10 @@ class Settings
                 $value = $string;
             }
 
-            $this->settings[$id] = $value;
+            $this->values[$id] = $value;
         }
 
-        return $this->settings[$id];
+        return $this->values[$id];
     }
 
     public function addTransformer(TransformerInterface $transformer): self
@@ -86,5 +92,14 @@ class Settings
         $this->transformers[$transformer->getId()] = $transformer;
 
         return $this;
+    }
+
+    private function getEntity(string $id): ?Setting
+    {
+        if (!isset($this->entities[$id])) {
+            $this->entities[$id] = $this->em->getRepository(Setting::class)->find($id);
+        }
+
+        return $this->entities[$id];
     }
 }
