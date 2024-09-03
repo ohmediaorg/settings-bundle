@@ -63,7 +63,7 @@ class Settings
         }
 
         if (!array_key_exists($id, $this->values)) {
-            $setting = $this->entities[$id] ?? null;
+            $setting = $this->getEntity($id);
 
             $string = $setting ? $setting->getValue() : null;
 
