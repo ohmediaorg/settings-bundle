@@ -12,16 +12,12 @@ class Settings
     private array $entities = [];
     private array $transformers = [];
     private array $values = [];
+    private bool $init = false;
 
     public function __construct(
         private EntityIdentifier $entityIdentifier,
         private EntityManagerInterface $em
     ) {
-        $entities = $this->em->getRepository(Setting::class)->findAll();
-
-        foreach ($entities as $entity) {
-            $this->entities[$entity->getId()] = $entity;
-        }
     }
 
     public function set(string $id, $value): self
@@ -96,6 +92,16 @@ class Settings
 
     private function getEntity(string $id): ?Setting
     {
+        if (!$this->init) {
+            $this->init = true;
+
+            $entities = $this->em->getRepository(Setting::class)->findAll();
+
+            foreach ($entities as $entity) {
+                $this->entities[$entity->getId()] = $entity;
+            }
+        }
+
         if (!isset($this->entities[$id])) {
             $this->entities[$id] = $this->em->getRepository(Setting::class)->find($id);
         }
