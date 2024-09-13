@@ -4,12 +4,15 @@ namespace OHMedia\SettingsBundle\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 class Setting
 {
     #[ORM\Id]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private string $id;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -20,7 +23,7 @@ class Setting
         return $this->id;
     }
 
-    public function setId(string $id): static
+    public function setId(?string $id): static
     {
         $this->id = $id;
 
