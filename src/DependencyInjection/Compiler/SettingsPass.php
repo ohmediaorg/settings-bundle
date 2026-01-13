@@ -2,6 +2,7 @@
 
 namespace OHMedia\SettingsBundle\DependencyInjection\Compiler;
 
+use OHMedia\SettingsBundle\Service\Settings;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -11,11 +12,11 @@ class SettingsPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         // always first check if the primary service is defined
-        if (!$container->has('oh_media_settings.settings')) {
+        if (!$container->has(Settings::class)) {
             return;
         }
 
-        $definition = $container->findDefinition('oh_media_settings.settings');
+        $definition = $container->findDefinition(Settings::class);
 
         $tagged = $container->findTaggedServiceIds('oh_media_settings.transformer');
 
