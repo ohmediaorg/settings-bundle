@@ -1,13 +1,10 @@
 services:
-    OHMedia\SettingsBundle\Service\Settings:
+    _defaults:
         autowire: true
+        autoconfigure: true
 
-    oh_media_settings.settings: '@OHMedia\SettingsBundle\Service\Settings'
-
-    oh_media_settings.twig_extension:
-        class: OHMedia\SettingsBundle\Twig\SettingsExtension
-        arguments: ["@oh_media_settings.settings"]
-        tags: ["twig.extension"]
-
-    OHMedia\SettingsBundle\Service\SettingEntityChoice:
-        tags: ["oh_media_security.entity_choice"]
+    OHMedia\SettingsBundle\:
+        resource: '../src/'
+        exclude:
+            - '../src/Entity/'
+            - '../src/OHMediaSettingsBundle.php'
